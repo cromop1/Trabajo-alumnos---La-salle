@@ -1,10 +1,8 @@
 <!doctype html>
-<html lang="es">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="es"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light">
-<title>Meditación infantil · Los tres pasos del corazón</title>
+<title>Meditación infantil · Los tres pasos del corazón · Microsoft Alex</title>
 <style>
 :root{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#273b43;background:#edf5f1}
 *{box-sizing:border-box}body{margin:0;padding:38px 16px 48px}
@@ -26,88 +24,131 @@ input[type=range]{width:100%;accent-color:#318263}.small{font-size:13px;line-hei
 #status{min-height:21px;font-size:13px;color:#47725e;margin-bottom:2px}
 .steps{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.step{padding:8px 11px;border-radius:100px;background:#e7f3eb;font-size:12px;font-weight:700;color:#3a7755}
 @media(max-width:570px){header,.content{padding:25px 20px}.settings{grid-template-columns:1fr}.field:first-child{grid-column:span 1}.actions button{flex-grow:1}}
+
+#status{line-height:1.5;min-height:42px}
+.support{border:1px solid #cfe3d9;border-radius:14px;background:#f6faf7;padding:14px 16px;margin-top:20px;font-size:14px;color:#405d51;line-height:1.6}
+.support strong{color:#214b3d}
+#voiceMode{font-size:13px;color:#40745e;font-weight:700;margin:8px 0}
+#refresh{font-size:13px;padding:10px 12px}
+#notReady{display:none}
 </style>
-</head>
-<body>
-<main>
-<header><div class="eyebrow">🌿 Un momento de calma</div><h1>Los tres pasos del corazón</h1><p>Una meditación guiada para niños: reconocer nuestras acciones, arrepentirnos y decidir hacer el bien. Elegí la voz en español que suene más natural en tu computadora.</p></header>
-<div class="content">
+</head><body>
+<main><header>
+<div class="eyebrow">🌿 Un momento de calma</div>
+<h1>Los tres pasos del corazón</h1>
+<p>Meditación guiada para niños con música tranquila y la voz <strong>Microsoft Alex (Natural), español de Perú</strong>. Ideal para compartir con un código QR.</p>
+</header><div class="content">
 <div class="steps"><span class="step">1 · Examino mi corazón</span><span class="step">2 · Me arrepiento</span><span class="step">3 · Deseo cambiar</span></div>
-<div class="display" aria-live="polite"><div id="stage">Listo para comenzar</div><div id="phrase">Buscá un lugar tranquilo. Cuando quieras, presioná Reproducir.</div><div id="progress"></div></div>
-<div class="actions"><button class="primary" id="play">▶ Reproducir</button><button id="pause" disabled>⏸ Pausar</button><button id="stop" disabled>■ Detener</button></div>
-<div id="status" aria-live="polite"></div>
-<div class="settings"><div class="field"><label for="voice">Voz: probá varias y quedate con la que suene más humana</label><select id="voice"><option value="">Buscando voces en español…</option></select></div><div class="field"><label for="rate">Ritmo de la narración: <span id="rateText">0,90×</span></label><input id="rate" type="range" min="0.75" max="1.10" value="0.90" step="0.05"></div><div class="field"><label for="volume">Música de relajación: <span id="volumeText">65%</span></label><input id="volume" type="range" min="0" max="100" value="65" step="5"></div></div>
-<div class="note"><strong>Para obtener mejor calidad de voz:</strong> abrí este archivo en Microsoft Edge o Google Chrome y elegí una voz en español de la lista. La calidad depende de las voces instaladas en tu equipo. Si no aparece ninguna voz en español, instalá una desde Configuración → Hora e idioma → Idioma → Opciones de idioma → Voz. La música se genera en el navegador y no necesita internet. El volumen inicial es más alto y baja suavemente cuando habla la voz; podés ajustarlo con el control de música.<p class="small">Este reproductor sirve para escuchar la meditación con voces de tu equipo. No es un MP3 con voz neuronal ni una grabación humana.</p></div>
+<div class="display" aria-live="polite"><div id="stage">Preparando la meditación</div><div id="phrase">Buscá un lugar tranquilo. Cuando quieras, presioná Reproducir.</div><div id="progress"></div></div>
+<div class="actions"><button class="primary" id="play" disabled>▶ Reproducir</button><button id="pause" disabled>⏸ Pausar</button><button id="stop" disabled>■ Detener</button></div>
+<div id="status" role="status" aria-live="polite">Comprobando si la narración está disponible…</div>
+<div id="voiceMode">Voz preferida: Microsoft Alex Online (Natural) · es-PE</div>
+<div class="settings">
+<div class="field"><label for="voice">Voz disponible (solo si todavía no se generó el MP3)</label><select id="voice" disabled><option>Buscando voces…</option></select></div>
+<div class="field"><label for="rate">Velocidad (modo voz del navegador): <span id="rateText">0,90×</span></label><input id="rate" type="range" min="0.75" max="1.10" value="0.90" step="0.05"></div>
+<div class="field"><label for="volume">Volumen de la música: <span id="volumeText">70%</span></label><input id="volume" type="range" min="0" max="100" value="70" step="5"></div>
+</div>
+<div class="support"><strong>Para compartir por QR:</strong> esta página utiliza automáticamente el audio generado con la voz Alex cuando está publicado. Así funciona también en celulares, sin instalar voces. Si todavía no se generó, en Edge de escritorio intenta usar la voz Alex del navegador. <button type="button" id="refresh">↻ Buscar voces otra vez</button></div>
+<div class="note">Si aparece «Audio Alex no publicado», no es un problema de GitHub Pages ni del teléfono: falta ejecutar el generador del proyecto y publicar el MP3. Ver instrucciones en el archivo <strong>LEEME.txt</strong> del paquete.</div>
 </div></main>
+<audio id="narration" preload="metadata" hidden playsinline></audio>
+<script type="application/json" id="meditation-data">[{"text": "Hola. Te invito a hacer un viaje muy especial,  un viaje hacia tu corazón.", "pause": 1.9}, {"text": "Buscá un lugar tranquilo. Sentate cómodo, apoyá los pies y relajá los hombros.", "pause": 2.5}, {"text": "Si querés, cerrá suavemente los ojos.", "pause": 2.4}, {"text": "Respirá por la nariz, muy despacito,  uno, dos, tres.", "pause": 2.9}, {"text": "Soltá el aire con tranquilidad,  uno, dos, tres.", "pause": 3.0}, {"text": "Una vez más. Tomá aire,  y dejalo salir.", "pause": 3.4}, {"text": "Primer paso. Examino mi corazón. Pienso en lo que hice mal.", "pause": 2.1}, {"text": "Imaginá que tu corazón es un lugar lleno de luz. Esa luz te ayuda a mirar tus acciones con sinceridad.", "pause": 2.0}, {"text": "Recordá algo de hoy o de estos días. ¿Tal vez dijiste una palabra que lastimó? ¿No compartiste algo? ¿O no escuchaste a alguien?", "pause": 4.3}, {"text": "No necesitás contarlo en voz alta. Solo reconocelo en tu corazón.", "pause": 6.0}, {"text": "Segundo paso. Me arrepiento. Siento que quiero cambiar.", "pause": 2.2}, {"text": "Pensá en eso que pasó. Quizás ahora sentís ganas de haber actuado de otra manera.", "pause": 2.5}, {"text": "Podés decirte en silencio: lo que hice no estuvo bien, y quiero hacerlo mejor.", "pause": 4.4}, {"text": "Todos podemos equivocarnos. Lo importante es aprender, pedir perdón cuando haga falta, y volver a intentarlo.", "pause": 4.3}, {"text": "Respirá profundo, y tratá a tu corazón con cariño.", "pause": 4.0}, {"text": "Tercer paso. Deseo cambiar las acciones que no son buenas.", "pause": 2.4}, {"text": "Ahora pensá en una pequeña acción buena que puedas hacer.", "pause": 2.2}, {"text": "Tal vez escuchar con atención, compartir, hablar con respeto, ayudar a un amigo, o pedir perdón.", "pause": 3.8}, {"text": "Elegí una sola acción. Imaginá que la hacés con una sonrisa.", "pause": 5.8}, {"text": "Repetí en tu corazón: puedo aprender. Puedo mejorar. Hoy voy a intentarlo.", "pause": 4.2}, {"text": "Sentí tu respiración tranquila. Mové despacito las manos y los pies.", "pause": 1.8}, {"text": "Cuando estés listo, abrí los ojos.", "pause": 1.8}, {"text": "Recordá: cada día es una nueva oportunidad para hacer el bien. Gracias por compartir este momento.", "pause": 4.0}]</script>
 <script>
 'use strict';
-const sections = [{"text": "Hola. Te invito a hacer un viaje muy especial,  un viaje hacia tu corazón.", "pause": 1.9}, {"text": "Buscá un lugar tranquilo. Sentate cómodo, apoyá los pies y relajá los hombros.", "pause": 2.5}, {"text": "Si querés, cerrá suavemente los ojos.", "pause": 2.4}, {"text": "Respirá por la nariz, muy despacito,  uno, dos, tres.", "pause": 2.9}, {"text": "Soltá el aire con tranquilidad,  uno, dos, tres.", "pause": 3.0}, {"text": "Una vez más. Tomá aire,  y dejalo salir.", "pause": 3.4}, {"text": "Primer paso. Examino mi corazón. Pienso en lo que hice mal.", "pause": 2.1}, {"text": "Imaginá que tu corazón es un lugar lleno de luz. Esa luz te ayuda a mirar tus acciones con sinceridad.", "pause": 2.0}, {"text": "Recordá algo de hoy o de estos días. ¿Tal vez dijiste una palabra que lastimó? ¿No compartiste algo? ¿O no escuchaste a alguien?", "pause": 4.3}, {"text": "No necesitás contarlo en voz alta. Solo reconocelo en tu corazón.", "pause": 6.0}, {"text": "Segundo paso. Me arrepiento. Siento que quiero cambiar.", "pause": 2.2}, {"text": "Pensá en eso que pasó. Quizás ahora sentís ganas de haber actuado de otra manera.", "pause": 2.5}, {"text": "Podés decirte en silencio: lo que hice no estuvo bien, y quiero hacerlo mejor.", "pause": 4.4}, {"text": "Todos podemos equivocarnos. Lo importante es aprender, pedir perdón cuando haga falta, y volver a intentarlo.", "pause": 4.3}, {"text": "Respirá profundo, y tratá a tu corazón con cariño.", "pause": 4.0}, {"text": "Tercer paso. Deseo cambiar las acciones que no son buenas.", "pause": 2.4}, {"text": "Ahora pensá en una pequeña acción buena que puedas hacer.", "pause": 2.2}, {"text": "Tal vez escuchar con atención, compartir, hablar con respeto, ayudar a un amigo, o pedir perdón.", "pause": 3.8}, {"text": "Elegí una sola acción. Imaginá que la hacés con una sonrisa.", "pause": 5.8}, {"text": "Repetí en tu corazón: puedo aprender. Puedo mejorar. Hoy voy a intentarlo.", "pause": 4.2}, {"text": "Sentí tu respiración tranquila. Mové despacito las manos y los pies.", "pause": 1.8}, {"text": "Cuando estés listo, abrí los ojos.", "pause": 1.8}, {"text": "Recordá: cada día es una nueva oportunidad para hacer el bien. Gracias por compartir este momento.", "pause": 4.0}];
-const synth=window.speechSynthesis;
-const voiceSel=document.getElementById('voice');
-const play=document.getElementById('play');
-const pause=document.getElementById('pause');
-const stop=document.getElementById('stop');
-const stage=document.getElementById('stage');
-const phrase=document.getElementById('phrase');
-const progress=document.getElementById('progress');
-const status=document.getElementById('status');
-const rateEl=document.getElementById('rate');
-const volEl=document.getElementById('volume');
-let voices=[], index=0, playing=false, paused=false, timer=null, musicCtx=null, master=null, musicTimers=[], currentUtterance=null, session=0, waitingDelay=0, timerStartedAt=0, narrationActive=false;
-const prefers = name => /(neural|natural|google|dalia|paloma|elvira|laura|helena|sabina|lucia|sofia|paulina)/i.test(name);
-function getVoices(){
- voices=synth ? synth.getVoices() : [];
- const old=voiceSel.value;
- const supported=voices.map((v,i)=>({v,i})).filter(x=>/^es(-|$)/i.test(x.v.lang));
- supported.sort((a,b)=>Number(prefers(b.v.name))-Number(prefers(a.v.name)) || a.v.name.localeCompare(b.v.name));
- voiceSel.innerHTML='';
- if(!supported.length){const option=new Option('No hay voces en español instaladas','');voiceSel.add(option);status.textContent='No encontré voces en español. Instalá una voz en español para escucharlo correctamente.';return;}
- supported.forEach(({v,i})=>voiceSel.add(new Option(v.name+' · '+v.lang+(prefers(v.name)?' ★':''),String(i))));
- voiceSel.value=[...voiceSel.options].some(x=>x.value===old)?old:voiceSel.options[0].value;
- status.textContent='Hay '+supported.length+' voces en español disponibles. Elegí la que más te guste.';
+const ALEX_NAME='Microsoft Alex Online (Natural) - Spanish (Peru)';
+const ALEX_LANG='es-PE';
+const SECTIONS=JSON.parse(document.getElementById('meditation-data').textContent);
+const $=id=>document.getElementById(id);
+const ui={play:$('play'),pause:$('pause'),stop:$('stop'),voice:$('voice'),rate:$('rate'),vol:$('volume'),stage:$('stage'),phrase:$('phrase'),progress:$('progress'),status:$('status'),mode:$('voiceMode'),audio:$('narration')};
+const synth=('speechSynthesis' in window)?window.speechSynthesis:null;
+let voices=[],selectedVoice=null,recorded=false,loadingAudio=true,timeline=[],index=0,playing=false,paused=false,mode=null,currentUtterance=null,session=0,timeoutId=null,waitLeft=0,waitBegan=0,musicCtx=null,master=null,musicTimers=[],narrationActive=false;
+function isAlex(v){return v.lang?.toLowerCase()==='es-pe' && /Microsoft Alex Online/i.test(v.name)}
+function updateButtons(){ui.play.disabled=playing||(!recorded&&!selectedVoice);ui.pause.disabled=!playing;ui.stop.disabled=!playing;ui.pause.textContent=paused?'▶ Continuar':'⏸ Pausar'}
+function availableVoices(){
+  if(recorded){updateButtons();return}
+  voices=synth?Array.from(synth.getVoices()):[];
+  const spanish=voices.filter(v=>/^es(-|$)/i.test(v.lang));
+  spanish.sort((a,b)=>Number(isAlex(b))-Number(isAlex(a))||a.name.localeCompare(b.name));
+  ui.voice.replaceChildren();
+  if(!spanish.length){ui.voice.add(new Option('Sin voces en español disponibles',''));selectedVoice=null;ui.voice.disabled=true}
+  else{
+    spanish.forEach(v=>ui.voice.add(new Option(v.name+' · '+v.lang+(isAlex(v)?' ★':''),v.voiceURI)));
+    const desired=spanish.find(v=>isAlex(v));
+    if(desired){ui.voice.value=desired.voiceURI;selectedVoice=desired}
+    else{ui.voice.add(new Option('Elegí otra voz si querés (Alex no disponible)',''));ui.voice.value='';selectedVoice=null}
+    ui.voice.disabled=recorded;
+  }
+  if(!recorded&&!playing){
+    ui.mode.textContent=selectedVoice?(isAlex(selectedVoice)?'✓ Microsoft Alex Online (Natural) · es-PE disponible en este navegador':'Se eligió otra voz en español'):'Microsoft Alex no está disponible en este dispositivo';
+    if(!loadingAudio)ui.status.textContent=selectedVoice?'Usando Alex de Edge. Para QR en celulares, publicá también el MP3 generado.':'La voz Alex no está disponible aquí. Para que funcione desde el QR, publicá el MP3 Alex del proyecto.';
+  }
+  updateButtons();
 }
-getVoices();if(synth) synth.onvoiceschanged=getVoices;
-function resetButtons(){play.disabled=playing;pause.disabled=!playing;stop.disabled=!playing;pause.textContent=paused?'▶ Continuar':'⏸ Pausar'}
-function clearTimer(){if(timer!==null){clearTimeout(timer);timer=null}}
-function stopAmbient(){musicTimers.forEach(clearTimeout);musicTimers=[];narrationActive=false;if(musicCtx){const ctx=musicCtx;musicCtx=null;master=null;try{ctx.close()}catch(e){}}}
-function setMusicLevel(){
- if(!master||!musicCtx)return;
- const strength=Number(volEl.value)/100*0.18;
- const target=strength*(narrationActive?0.52:1);
- master.gain.setTargetAtTime(target,musicCtx.currentTime,0.20);
-}
+ui.voice.addEventListener('change',()=>{selectedVoice=voices.find(v=>v.voiceURI===ui.voice.value)||null;updateButtons()});
+if(synth){if(synth.addEventListener)synth.addEventListener('voiceschanged',availableVoices);else synth.onvoiceschanged=availableVoices;}
+$('refresh').onclick=()=>{availableVoices();ui.status.textContent=recorded?'El audio Alex ya está publicado y listo.':selectedVoice?'Se encontró una voz. Tocá Reproducir para escucharla.':'Sin voces del navegador. Abrí la web desde Edge en Windows, o publicá la narración grabada.'};
+function cancelWait(){if(timeoutId!==null){clearTimeout(timeoutId);timeoutId=null}}
+function stopAmbient(){musicTimers.forEach(clearTimeout);musicTimers=[];narrationActive=false;const ctx=musicCtx;musicCtx=null;master=null;if(ctx)ctx.close().catch(()=>{})}
+function musicVolume(){if(!master||!musicCtx)return;const v=Number(ui.vol.value)/100*.18;master.gain.setTargetAtTime(v*(narrationActive?.48:1),musicCtx.currentTime,.18)}
 function startAmbient(){
- const Ctx=window.AudioContext||window.webkitAudioContext;
- if(!Ctx)return;
- stopAmbient();const ctx=new Ctx();musicCtx=ctx;
- const gain=ctx.createGain();master=gain;gain.gain.value=Number(volEl.value)/100*0.18;gain.connect(ctx.destination);
+ const Ctx=window.AudioContext||window.webkitAudioContext;if(!Ctx)return;stopAmbient();
+ const ctx=new Ctx();musicCtx=ctx;const out=ctx.createGain();out.gain.value=0;out.connect(ctx.destination);master=out;musicVolume();
  const chords=[[220,261.63,329.63],[196,246.94,293.66],[174.61,220,261.63],[196,246.94,293.66]];
- function chord(n){if(ctx!==musicCtx)return;const base=ctx.currentTime;const chordgain=ctx.createGain();chordgain.gain.setValueAtTime(0.0001,base);chordgain.gain.exponentialRampToValueAtTime(.33,base+3.8);chordgain.gain.setValueAtTime(.33,base+13);chordgain.gain.exponentialRampToValueAtTime(.0001,base+18);chordgain.connect(gain);
-  for(const f of chords[n%chords.length])for(const factor of [1,1.002,2]){const o=ctx.createOscillator();o.type='sine';o.frequency.value=f*factor;const g=ctx.createGain();g.gain.value=factor===2?.1:.32;o.connect(g).connect(chordgain);o.start(base);o.stop(base+18.05)}
-  musicTimers.push(setTimeout(()=>chord(n+1),14500));}
+ function chord(n){if(musicCtx!==ctx)return;const t=ctx.currentTime;const env=ctx.createGain();env.gain.setValueAtTime(.0001,t);env.gain.exponentialRampToValueAtTime(.33,t+3.8);env.gain.setValueAtTime(.33,t+13);env.gain.exponentialRampToValueAtTime(.0001,t+18);env.connect(out);for(const f of chords[n%chords.length])for(const mul of [1,1.002,2]){const o=ctx.createOscillator();const g=ctx.createGain();o.type='sine';o.frequency.value=f*mul;g.gain.value=mul===2?.1:.32;o.connect(g).connect(env);o.start(t);o.stop(t+18.05)} musicTimers.push(setTimeout(()=>chord(n+1),14500));}
  chord(0);
 }
-function setStage(i){if(i<6)return 'Respiramos con calma';if(i<10)return 'Paso 1 · Examino mi corazón';if(i<15)return 'Paso 2 · Me arrepiento';if(i<20)return 'Paso 3 · Deseo cambiar';return 'Cerramos la meditación'}
-function scheduleNext(delay){waitingDelay=delay;timerStartedAt=Date.now();timer=setTimeout(()=>{timer=null;if(!paused && playing)speakNext()},delay)}
-function speakNext(){
- if(!playing||paused)return;
- if(index>=sections.length){finish();return;}
- const entry=sections[index];const thisIndex=index++;const currentSession=session;
- stage.textContent=setStage(thisIndex);phrase.textContent=entry.text;progress.textContent='Fragmento '+index+' de '+sections.length;
- const utter=new SpeechSynthesisUtterance(entry.text);currentUtterance=utter;utter.lang='es-AR';utter.rate=Number(rateEl.value);utter.pitch=1;utter.volume=1;
- const v=voices[Number(voiceSel.value)];if(v) {utter.voice=v;utter.lang=v.lang;}
- utter.onstart=()=>{if(currentSession!==session||!playing)return;narrationActive=true;setMusicLevel()};
- utter.onend=()=>{if(currentSession!==session||!playing)return;narrationActive=false;setMusicLevel();currentUtterance=null;scheduleNext(entry.pause*1000)};
- utter.onerror=e=>{if(currentSession!==session||!playing)return; if(e.error==='interrupted'||e.error==='canceled')return;status.textContent='No se pudo reproducir este fragmento ('+e.error+'). Probá otra voz.';finish(false)};
- try{synth.speak(utter)}catch(e){status.textContent='No fue posible reproducir la voz en este navegador.';finish(false)}
+function stageFor(i){if(i<6)return 'Respiramos con calma';if(i<10)return '1 · Examino mi corazón';if(i<15)return '2 · Me arrepiento';if(i<20)return '3 · Deseo cambiar';return 'Cierre de la meditación'}
+function showSection(i){if(i<0||i>=SECTIONS.length)return;ui.stage.textContent=stageFor(i);ui.phrase.textContent=SECTIONS[i].text;ui.progress.textContent='Fragmento '+(i+1)+' de '+SECTIONS.length}
+function setNarration(active){if(narrationActive!==active){narrationActive=active;musicVolume()}}
+function checkRecordedPosition(){if(!recorded||mode!=='recorded'||!playing)return;const t=ui.audio.currentTime;let i=timeline.findIndex(x=>t>=x.start&&t<x.after);if(i<0){i=timeline.length-1;}if(i>=0){if(index!==i){index=i;showSection(i)}setNarration(t>=timeline[i].start&&t<timeline[i].end)}}
+ui.audio.addEventListener('timeupdate',checkRecordedPosition);
+ui.audio.addEventListener('ended',()=>{if(mode==='recorded'&&playing)finish(true)});
+ui.audio.addEventListener('error',()=>{if(!recorded)return;if(mode==='recorded'&&playing){ui.status.textContent='No se pudo abrir la narración MP3. Comprobá que esté publicada junto a esta página.';finish(false)}});
+async function loadRecorded(){
+ try{
+  const response=await fetch('./audio/timeline.json',{cache:'no-store'});
+  if(!response.ok)throw new Error('Sin datos del MP3');
+  const data=await response.json();
+  if(data.voice!=='es-PE-AlexNeural'||!Array.isArray(data.timeline)||data.timeline.length!==SECTIONS.length)throw new Error('Datos de narración incompatibles');
+  const segments=data.timeline;
+  for(let i=0;i<segments.length;i++){const s=segments[i];if(!Number.isFinite(s.start)||!Number.isFinite(s.end)||!Number.isFinite(s.after)||s.end<s.start||s.after<s.end||(i&&s.start<segments[i-1].after-.04))throw new Error('Cronología inválida')}
+  ui.audio.src='./audio/meditacion_alex_es_PE.mp3';
+  ui.audio.load();
+  await new Promise((resolve,reject)=>{let done=false;const clear=()=>{ui.audio.removeEventListener('loadedmetadata',ok);ui.audio.removeEventListener('error',fail)};const ok=()=>{if(done)return;done=true;clear();resolve()};const fail=()=>{if(done)return;done=true;clear();reject(new Error('MP3 ausente'))};ui.audio.addEventListener('loadedmetadata',ok);ui.audio.addEventListener('error',fail);if(ui.audio.readyState>=1)ok()});
+  recorded=true;timeline=segments;ui.voice.replaceChildren(new Option(ALEX_NAME+' · es-PE ★ (audio publicado)','recorded'));ui.voice.disabled=true;
+  ui.mode.textContent='✓ Voz Microsoft Alex Natural (es-PE) · audio MP3 para todos los dispositivos';
+  ui.status.textContent='Audio de Alex listo. Funciona también desde el celular y con el código QR.';
+ }catch(error){recorded=false;availableVoices();if(!selectedVoice)ui.status.textContent='Falta publicar el audio de Microsoft Alex. Seguí los pasos de LEEME.txt; este navegador no ofrece esa voz.';}
+ finally{loadingAudio=false;updateButtons()}
 }
-function finish(done=true){playing=false;paused=false;clearTimer();stopAmbient();resetButtons();if(done){stage.textContent='Meditación terminada';phrase.textContent='Cada día es una nueva oportunidad para hacer el bien. 🌷';progress.textContent=''} }
-function stopAll(){session++;playing=false;paused=false;clearTimer();if(synth)synth.cancel();stopAmbient();index=0;currentUtterance=null;resetButtons();stage.textContent='Listo para comenzar';phrase.textContent='Buscá un lugar tranquilo. Cuando quieras, presioná Reproducir.';progress.textContent=''}
-play.onclick=()=>{if(!synth){status.textContent='Este navegador no admite voz sintetizada.';return}if(!voices.some(v=>/^es(-|$)/i.test(v.lang))){status.textContent='No hay una voz en español disponible. Instalá una desde las opciones de idioma de Windows.';return}stopAll();session++;playing=true;paused=false;resetButtons();startAmbient();stage.textContent='Preparándonos';phrase.textContent='Respirá suavemente. La meditación comienza en unos segundos…';progress.textContent='';scheduleNext(3200)};
-stop.onclick=stopAll;
-pause.onclick=()=>{if(!playing)return;if(!paused){paused=true;if(synth.speaking)synth.pause();if(musicCtx)musicCtx.suspend();if(timer!==null){waitingDelay=Math.max(0,waitingDelay-(Date.now()-timerStartedAt));clearTimer()}pause.textContent='▶ Continuar';status.textContent='Meditación en pausa.';}else{paused=false;if(synth.paused)synth.resume();if(musicCtx)musicCtx.resume();if(waitingDelay>0&&!synth.speaking){scheduleNext(waitingDelay);waitingDelay=0;}else if(!synth.speaking && timer===null && currentUtterance===null){speakNext()}pause.textContent='⏸ Pausar';status.textContent='Escuchando meditación.';}};
-rateEl.oninput=()=>document.getElementById('rateText').textContent=Number(rateEl.value).toFixed(2).replace('.',',')+'×';
-volEl.oninput=()=>{document.getElementById('volumeText').textContent=volEl.value+'%';setMusicLevel()};
+function waitNext(ms){waitLeft=ms;waitBegan=Date.now();cancelWait();timeoutId=setTimeout(()=>{timeoutId=null;if(playing&&!paused)speakNext()},ms)}
+function speakNext(){
+ if(!playing||paused||mode!=='browser')return;
+ if(index>=SECTIONS.length){finish(true);return}
+ const i=index++;const entry=SECTIONS[i];const currentSession=session;showSection(i);
+ const utt=new SpeechSynthesisUtterance(entry.text);currentUtterance=utt;utt.voice=selectedVoice;utt.lang=selectedVoice.lang;utt.rate=Number(ui.rate.value);utt.pitch=1;utt.volume=1;
+ utt.onstart=()=>{if(currentSession!==session||!playing)return;setNarration(true)};
+ utt.onend=()=>{if(currentSession!==session||!playing)return;setNarration(false);currentUtterance=null;waitNext(entry.pause*1000)};
+ utt.onerror=e=>{if(currentSession!==session||!playing||['interrupted','canceled'].includes(e.error))return;ui.status.textContent='Hubo un error en la voz del navegador ('+e.error+'). Para QR, publicá el audio MP3 con Alex.';finish(false)};
+ try{synth.speak(utt)}catch(err){ui.status.textContent='No fue posible reproducir la voz seleccionada.';finish(false)}
+}
+function finish(ok){playing=false;paused=false;cancelWait();stopAmbient();setNarration(false);updateButtons();mode=null;if(ok){ui.stage.textContent='Meditación terminada';ui.phrase.textContent='Cada día es una oportunidad para hacer el bien. 🌷';ui.progress.textContent=''} }
+function stopAll(){session++;playing=false;paused=false;cancelWait();if(synth)synth.cancel();ui.audio.pause();try{ui.audio.currentTime=0}catch(e){}stopAmbient();index=0;currentUtterance=null;mode=null;ui.stage.textContent='Listo para comenzar';ui.phrase.textContent='Buscá un lugar tranquilo. Cuando quieras, presioná Reproducir.';ui.progress.textContent='';updateButtons()}
+ui.play.onclick=()=>{
+ if(!recorded&&!selectedVoice){ui.status.textContent='Necesitás publicar el MP3 de Microsoft Alex. No es posible activar esa voz desde una web en cualquier teléfono.';return}
+ stopAll();session++;playing=true;paused=false;startAmbient();updateButtons();
+ if(recorded){mode='recorded';showSection(0);index=0;ui.status.textContent='Escuchando la voz natural Microsoft Alex.';ui.audio.currentTime=0;ui.audio.play().catch(()=>{ui.status.textContent='El navegador impidió iniciar el audio. Tocá Reproducir nuevamente.';finish(false)})}
+ else{mode='browser';ui.status.textContent=isAlex(selectedVoice)?'Escuchando Microsoft Alex desde Edge.':'Escuchando '+selectedVoice.name+'. Para usar Alex en otros celulares, publicá el MP3.';ui.stage.textContent='Preparándonos';ui.phrase.textContent='Respirá suavemente. La meditación comienza…';waitNext(1200)}
+};
+ui.stop.onclick=stopAll;
+ui.pause.onclick=()=>{
+ if(!playing)return;
+ if(!paused){paused=true;if(mode==='recorded')ui.audio.pause();else{if(synth&&synth.speaking)synth.pause();if(timeoutId!==null){waitLeft=Math.max(0,waitLeft-(Date.now()-waitBegan));cancelWait()}}if(musicCtx)musicCtx.suspend().catch(()=>{});ui.status.textContent='Meditación en pausa.'}
+ else{paused=false;if(mode==='recorded')ui.audio.play().catch(()=>{ui.status.textContent='No se pudo reanudar el audio.'});else{if(synth?.paused)synth.resume();else if(timeoutId===null&&currentUtterance===null)waitLeft?waitNext(waitLeft):speakNext()}if(musicCtx)musicCtx.resume().catch(()=>{});ui.status.textContent='Meditación en reproducción.'}
+ updateButtons()
+};
+ui.rate.addEventListener('input',()=>{$('rateText').textContent=Number(ui.rate.value).toFixed(2).replace('.',',')+'×'});
+ui.vol.addEventListener('input',()=>{$('volumeText').textContent=ui.vol.value+'%';musicVolume()});
 window.addEventListener('beforeunload',stopAll);
-</script>
-</body></html>
+availableVoices();[250,750,1500,3000].forEach(ms=>setTimeout(availableVoices,ms));loadRecorded();
+</script></body></html>

@@ -1,0 +1,61 @@
+MEDITACIÓN INFANTIL - VOZ MICROSOFT ALEX (Natural) - ESPAÑOL PERÚ
+==================================================================
+
+¿POR QUÉ NO FUNCIONABA EN EL CELULAR?
+-----------------------------------
+GitHub Pages publica HTML, pero no instala voces. En Android/iPhone los
+navegadores no tienen por qué exponer las voces online de Microsoft Edge
+para la API speechSynthesis. Esta versión genera la voz Alex previamente
+y luego sirve un MP3 normal, compatible con los navegadores de los celulares.
+
+VOZ EXACTA: Microsoft Alex Online (Natural) - Spanish (Peru)
+IDENTIFICADOR: es-PE-AlexNeural
+
+CÓMO REEMPLAZAR TU SITIO EN GITHUB
+--------------------------------
+1. Descomprimí este ZIP.
+2. En tu repositorio, poné los archivos en la carpeta principal:
+   - index.html
+   - generar_audio.py
+   - requirements.txt
+   - .github/workflows/publicar-pages.yml
+   - LEEME.txt
+   La carpeta audio/ se crea automáticamente en el servidor.
+3. Hacé commit y push. Si trabajás con Git desde tu PC:
+     git add .
+     git commit -m "Meditacion con voz Microsoft Alex natural"
+     git push
+4. En GitHub, entrá a Settings -> Pages -> Build and deployment.
+   En "Source", elegí "GitHub Actions" (no "Deploy from a branch").
+5. Entrá a la pestaña Actions. Abrí el flujo
+   "Meditación - voz Alex y GitHub Pages".
+   Si no se ejecutó solo al subir los archivos, elegí "Run workflow".
+6. Al terminar con estado verde, abrí la URL publicada en Pages.
+   Probá desde tu celular con el código QR. No necesita tener Alex instalado.
+
+La generación utiliza el paquete comunitario edge-tts y acceso a internet
+al servicio de voz online de Microsoft. Este acceso puede sufrir cambios o
+restricciones. Si falla en Actions, mirá el paso
+"Crear voz natural Microsoft Alex es-PE".
+
+IMPORTANTE
+---------
+- Si subís solamente index.html, la voz seguirá dependiendo del navegador.
+- GitHub Pages es hosting ESTÁTICO: no puede invocar un servicio TTS de manera
+  segura en cada visita. Por eso el workflow genera el MP3 antes de publicar.
+- El MP3 lleva la voz Alex y las pausas. La MÚSICA relajante se produce en la
+  web y se puede ajustar hasta 100%. La música baja durante la voz.
+- Si compartís el enlace con un QR, después del despliegue podés conservar
+  el mismo QR siempre que no cambie la URL.
+
+OPCIONAL: GENERAR AUDIO EN TU PC Y SUBIRLO A MANO
+------------------------------------------------
+Teniendo Python 3.11+ y ffmpeg instalados:
+  python -m pip install -r requirements.txt
+  python generar_audio.py
+Se crearán:
+  audio/meditacion_alex_es_PE.mp3
+  audio/timeline.json
+Subí esos dos archivos a tu repositorio junto con index.html.
+Si usás publicación "Deploy from a branch", esto basta para que funcione
+con cualquier navegador sin usar el workflow de Actions.
