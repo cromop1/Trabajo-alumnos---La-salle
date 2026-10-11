@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Meditación infantil · Los tres pasos del corazón</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#273b43;background:#edf5f1}
+*{box-sizing:border-box}body{margin:0;padding:38px 16px 48px}
+main{max-width:760px;margin:auto;background:#fff;border-radius:28px;box-shadow:0 15px 55px #304e4118;overflow:hidden}
+header{background:linear-gradient(120deg,#dcefe7,#faf1d9);padding:36px 36px 25px}
+.eyebrow{font-size:12px;letter-spacing:.12em;font-weight:750;text-transform:uppercase;color:#3e7466}
+h1{font-size:clamp(25px,4vw,38px);line-height:1.13;margin:10px 0;color:#21443b}
+header p{color:#50665e;font-size:16px;max-width:560px;line-height:1.6}
+.content{padding:28px 36px 40px}.display{min-height:150px;padding:24px;border-radius:19px;background:#f2f8f5;display:flex;flex-direction:column;justify-content:center}
+#stage{font-size:12px;letter-spacing:.10em;color:#3e8d6e;text-transform:uppercase;font-weight:800;margin-bottom:10px}
+#phrase{font-size:clamp(18px,3vw,24px);line-height:1.45;font-weight:650;color:#2a433b}
+#progress{font-size:13px;color:#687f75;padding-top:10px}button,select,input{font:inherit}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0 28px}button{border:0;padding:13px 20px;border-radius:14px;background:#e6f2eb;color:#245a45;cursor:pointer;font-weight:740}
+button.primary{background:#267856;color:#fff;flex:1}button:disabled{opacity:.35;cursor:not-allowed}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #d7a53a;outline-offset:3px}
+.settings{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field{display:flex;flex-direction:column;gap:8px}.field:first-child{grid-column:span 2}label{font-size:13px;font-weight:700;color:#527065}
+select{padding:12px;background:white;color:#253f35;border:1px solid #c9dcd0;border-radius:12px;width:100%}
+input[type=range]{width:100%;accent-color:#318263}.small{font-size:13px;line-height:1.5;color:#6b7c74}
+.note{margin-top:24px;border-top:1px solid #d9e9df;padding-top:22px;font-size:14px;line-height:1.7;color:#52645b}
+#status{min-height:21px;font-size:13px;color:#47725e;margin-bottom:2px}
+.steps{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.step{padding:8px 11px;border-radius:100px;background:#e7f3eb;font-size:12px;font-weight:700;color:#3a7755}
+@media(max-width:570px){header,.content{padding:25px 20px}.settings{grid-template-columns:1fr}.field:first-child{grid-column:span 1}.actions button{flex-grow:1}}
+</style>
+</head>
+<body>
+<main>
+<header><div class="eyebrow">🌿 Un momento de calma</div><h1>Los tres pasos del corazón</h1><p>Una meditación guiada para niños: reconocer nuestras acciones, arrepentirnos y decidir hacer el bien. Elegí la voz en español que suene más natural en tu computadora.</p></header>
+<div class="content">
+<div class="steps"><span class="step">1 · Examino mi corazón</span><span class="step">2 · Me arrepiento</span><span class="step">3 · Deseo cambiar</span></div>
+<div class="display" aria-live="polite"><div id="stage">Listo para comenzar</div><div id="phrase">Buscá un lugar tranquilo. Cuando quieras, presioná Reproducir.</div><div id="progress"></div></div>
+<div class="actions"><button class="primary" id="play">▶ Reproducir</button><button id="pause" disabled>⏸ Pausar</button><button id="stop" disabled>■ Detener</button></div>
+<div id="status" aria-live="polite"></div>
+<div class="settings"><div class="field"><label for="voice">Voz: probá varias y quedate con la que suene más humana</label><select id="voice"><option value="">Buscando voces en español…</option></select></div><div class="field"><label for="rate">Ritmo de la narración: <span id="rateText">0,90×</span></label><input id="rate" type="range" min="0.75" max="1.10" value="0.90" step="0.05"></div><div class="field"><label for="volume">Música de relajación: <span id="volumeText">65%</span></label><input id="volume" type="range" min="0" max="100" value="65" step="5"></div></div>
+<div class="note"><strong>Para obtener mejor calidad de voz:</strong> abrí este archivo en Microsoft Edge o Google Chrome y elegí una voz en español de la lista. La calidad depende de las voces instaladas en tu equipo. Si no aparece ninguna voz en español, instalá una desde Configuración → Hora e idioma → Idioma → Opciones de idioma → Voz. La música se genera en el navegador y no necesita internet. El volumen inicial es más alto y baja suavemente cuando habla la voz; podés ajustarlo con el control de música.<p class="small">Este reproductor sirve para escuchar la meditación con voces de tu equipo. No es un MP3 con voz neuronal ni una grabación humana.</p></div>
+</div></main>
+<script>
+'use strict';
+const sections = [{"text": "Hola. Te invito a hacer un viaje muy especial,  un viaje hacia tu corazón.", "pause": 1.9}, {"text": "Buscá un lugar tranquilo. Sentate cómodo, apoyá los pies y relajá los hombros.", "pause": 2.5}, {"text": "Si querés, cerrá suavemente los ojos.", "pause": 2.4}, {"text": "Respirá por la nariz, muy despacito,  uno, dos, tres.", "pause": 2.9}, {"text": "Soltá el aire con tranquilidad,  uno, dos, tres.", "pause": 3.0}, {"text": "Una vez más. Tomá aire,  y dejalo salir.", "pause": 3.4}, {"text": "Primer paso. Examino mi corazón. Pienso en lo que hice mal.", "pause": 2.1}, {"text": "Imaginá que tu corazón es un lugar lleno de luz. Esa luz te ayuda a mirar tus acciones con sinceridad.", "pause": 2.0}, {"text": "Recordá algo de hoy o de estos días. ¿Tal vez dijiste una palabra que lastimó? ¿No compartiste algo? ¿O no escuchaste a alguien?", "pause": 4.3}, {"text": "No necesitás contarlo en voz alta. Solo reconocelo en tu corazón.", "pause": 6.0}, {"text": "Segundo paso. Me arrepiento. Siento que quiero cambiar.", "pause": 2.2}, {"text": "Pensá en eso que pasó. Quizás ahora sentís ganas de haber actuado de otra manera.", "pause": 2.5}, {"text": "Podés decirte en silencio: lo que hice no estuvo bien, y quiero hacerlo mejor.", "pause": 4.4}, {"text": "Todos podemos equivocarnos. Lo importante es aprender, pedir perdón cuando haga falta, y volver a intentarlo.", "pause": 4.3}, {"text": "Respirá profundo, y tratá a tu corazón con cariño.", "pause": 4.0}, {"text": "Tercer paso. Deseo cambiar las acciones que no son buenas.", "pause": 2.4}, {"text": "Ahora pensá en una pequeña acción buena que puedas hacer.", "pause": 2.2}, {"text": "Tal vez escuchar con atención, compartir, hablar con respeto, ayudar a un amigo, o pedir perdón.", "pause": 3.8}, {"text": "Elegí una sola acción. Imaginá que la hacés con una sonrisa.", "pause": 5.8}, {"text": "Repetí en tu corazón: puedo aprender. Puedo mejorar. Hoy voy a intentarlo.", "pause": 4.2}, {"text": "Sentí tu respiración tranquila. Mové despacito las manos y los pies.", "pause": 1.8}, {"text": "Cuando estés listo, abrí los ojos.", "pause": 1.8}, {"text": "Recordá: cada día es una nueva oportunidad para hacer el bien. Gracias por compartir este momento.", "pause": 4.0}];
+const synth=window.speechSynthesis;
+const voiceSel=document.getElementById('voice');
+const play=document.getElementById('play');
+const pause=document.getElementById('pause');
+const stop=document.getElementById('stop');
+const stage=document.getElementById('stage');
+const phrase=document.getElementById('phrase');
+const progress=document.getElementById('progress');
+const status=document.getElementById('status');
+const rateEl=document.getElementById('rate');
+const volEl=document.getElementById('volume');
+let voices=[], index=0, playing=false, paused=false, timer=null, musicCtx=null, master=null, musicTimers=[], currentUtterance=null, session=0, waitingDelay=0, timerStartedAt=0, narrationActive=false;
+const prefers = name => /(neural|natural|google|dalia|paloma|elvira|laura|helena|sabina|lucia|sofia|paulina)/i.test(name);
+function getVoices(){
+ voices=synth ? synth.getVoices() : [];
+ const old=voiceSel.value;
+ const supported=voices.map((v,i)=>({v,i})).filter(x=>/^es(-|$)/i.test(x.v.lang));
+ supported.sort((a,b)=>Number(prefers(b.v.name))-Number(prefers(a.v.name)) || a.v.name.localeCompare(b.v.name));
+ voiceSel.innerHTML='';
+ if(!supported.length){const option=new Option('No hay voces en español instaladas','');voiceSel.add(option);status.textContent='No encontré voces en español. Instalá una voz en español para escucharlo correctamente.';return;}
+ supported.forEach(({v,i})=>voiceSel.add(new Option(v.name+' · '+v.lang+(prefers(v.name)?' ★':''),String(i))));
+ voiceSel.value=[...voiceSel.options].some(x=>x.value===old)?old:voiceSel.options[0].value;
+ status.textContent='Hay '+supported.length+' voces en español disponibles. Elegí la que más te guste.';
+}
+getVoices();if(synth) synth.onvoiceschanged=getVoices;
+function resetButtons(){play.disabled=playing;pause.disabled=!playing;stop.disabled=!playing;pause.textContent=paused?'▶ Continuar':'⏸ Pausar'}
+function clearTimer(){if(timer!==null){clearTimeout(timer);timer=null}}
+function stopAmbient(){musicTimers.forEach(clearTimeout);musicTimers=[];narrationActive=false;if(musicCtx){const ctx=musicCtx;musicCtx=null;master=null;try{ctx.close()}catch(e){}}}
+function setMusicLevel(){
+ if(!master||!musicCtx)return;
+ const strength=Number(volEl.value)/100*0.18;
+ const target=strength*(narrationActive?0.52:1);
+ master.gain.setTargetAtTime(target,musicCtx.currentTime,0.20);
+}
+function startAmbient(){
+ const Ctx=window.AudioContext||window.webkitAudioContext;
+ if(!Ctx)return;
+ stopAmbient();const ctx=new Ctx();musicCtx=ctx;
+ const gain=ctx.createGain();master=gain;gain.gain.value=Number(volEl.value)/100*0.18;gain.connect(ctx.destination);
+ const chords=[[220,261.63,329.63],[196,246.94,293.66],[174.61,220,261.63],[196,246.94,293.66]];
+ function chord(n){if(ctx!==musicCtx)return;const base=ctx.currentTime;const chordgain=ctx.createGain();chordgain.gain.setValueAtTime(0.0001,base);chordgain.gain.exponentialRampToValueAtTime(.33,base+3.8);chordgain.gain.setValueAtTime(.33,base+13);chordgain.gain.exponentialRampToValueAtTime(.0001,base+18);chordgain.connect(gain);
+  for(const f of chords[n%chords.length])for(const factor of [1,1.002,2]){const o=ctx.createOscillator();o.type='sine';o.frequency.value=f*factor;const g=ctx.createGain();g.gain.value=factor===2?.1:.32;o.connect(g).connect(chordgain);o.start(base);o.stop(base+18.05)}
+  musicTimers.push(setTimeout(()=>chord(n+1),14500));}
+ chord(0);
+}
+function setStage(i){if(i<6)return 'Respiramos con calma';if(i<10)return 'Paso 1 · Examino mi corazón';if(i<15)return 'Paso 2 · Me arrepiento';if(i<20)return 'Paso 3 · Deseo cambiar';return 'Cerramos la meditación'}
+function scheduleNext(delay){waitingDelay=delay;timerStartedAt=Date.now();timer=setTimeout(()=>{timer=null;if(!paused && playing)speakNext()},delay)}
+function speakNext(){
+ if(!playing||paused)return;
+ if(index>=sections.length){finish();return;}
+ const entry=sections[index];const thisIndex=index++;const currentSession=session;
+ stage.textContent=setStage(thisIndex);phrase.textContent=entry.text;progress.textContent='Fragmento '+index+' de '+sections.length;
+ const utter=new SpeechSynthesisUtterance(entry.text);currentUtterance=utter;utter.lang='es-AR';utter.rate=Number(rateEl.value);utter.pitch=1;utter.volume=1;
+ const v=voices[Number(voiceSel.value)];if(v) {utter.voice=v;utter.lang=v.lang;}
+ utter.onstart=()=>{if(currentSession!==session||!playing)return;narrationActive=true;setMusicLevel()};
+ utter.onend=()=>{if(currentSession!==session||!playing)return;narrationActive=false;setMusicLevel();currentUtterance=null;scheduleNext(entry.pause*1000)};
+ utter.onerror=e=>{if(currentSession!==session||!playing)return; if(e.error==='interrupted'||e.error==='canceled')return;status.textContent='No se pudo reproducir este fragmento ('+e.error+'). Probá otra voz.';finish(false)};
+ try{synth.speak(utter)}catch(e){status.textContent='No fue posible reproducir la voz en este navegador.';finish(false)}
+}
+function finish(done=true){playing=false;paused=false;clearTimer();stopAmbient();resetButtons();if(done){stage.textContent='Meditación terminada';phrase.textContent='Cada día es una nueva oportunidad para hacer el bien. 🌷';progress.textContent=''} }
+function stopAll(){session++;playing=false;paused=false;clearTimer();if(synth)synth.cancel();stopAmbient();index=0;currentUtterance=null;resetButtons();stage.textContent='Listo para comenzar';phrase.textContent='Buscá un lugar tranquilo. Cuando quieras, presioná Reproducir.';progress.textContent=''}
+play.onclick=()=>{if(!synth){status.textContent='Este navegador no admite voz sintetizada.';return}if(!voices.some(v=>/^es(-|$)/i.test(v.lang))){status.textContent='No hay una voz en español disponible. Instalá una desde las opciones de idioma de Windows.';return}stopAll();session++;playing=true;paused=false;resetButtons();startAmbient();stage.textContent='Preparándonos';phrase.textContent='Respirá suavemente. La meditación comienza en unos segundos…';progress.textContent='';scheduleNext(3200)};
+stop.onclick=stopAll;
+pause.onclick=()=>{if(!playing)return;if(!paused){paused=true;if(synth.speaking)synth.pause();if(musicCtx)musicCtx.suspend();if(timer!==null){waitingDelay=Math.max(0,waitingDelay-(Date.now()-timerStartedAt));clearTimer()}pause.textContent='▶ Continuar';status.textContent='Meditación en pausa.';}else{paused=false;if(synth.paused)synth.resume();if(musicCtx)musicCtx.resume();if(waitingDelay>0&&!synth.speaking){scheduleNext(waitingDelay);waitingDelay=0;}else if(!synth.speaking && timer===null && currentUtterance===null){speakNext()}pause.textContent='⏸ Pausar';status.textContent='Escuchando meditación.';}};
+rateEl.oninput=()=>document.getElementById('rateText').textContent=Number(rateEl.value).toFixed(2).replace('.',',')+'×';
+volEl.oninput=()=>{document.getElementById('volumeText').textContent=volEl.value+'%';setMusicLevel()};
+window.addEventListener('beforeunload',stopAll);
+</script>
+</body></html>
